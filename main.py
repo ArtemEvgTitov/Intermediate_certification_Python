@@ -1,6 +1,7 @@
 import Functions as func
+import Logger as log
 
-message_hi = 'Программа запущена\n '
+message_hi = '\nПрограмма запущена\n '
 message_bay = 'Программа выключена'
 
 message_level1 = 'Вот какие действия Вам доступны:\n' \
@@ -26,20 +27,25 @@ def start():
     print(message_hi)
     answer = input(message_level1)
     if answer == '1':
+        log.text_in_log("Пользователь запросил вывод всех заметок в терминал")
         func.print_all()
         start()
     elif answer == "2":
+        log.text_in_log("Пользователь запросил создание заметки")
         heading = input("Введите заголовок для заметки: ")
         text = input("Введите текст заметки: ")
         func.add_note(heading, text)
         start()
     elif answer == '3':
+        log.text_in_log("Пользователь запросил поиск заметки")
         func.search_note(input(message_level2))
         start()
     elif answer == '4':
+        log.text_in_log("Пользователь запросил выключение программы")
         func.stop_programm()
     else:
         print("Некорректный ввод")
+        log.text_in_log("Некорректный ввод в основном меню программы")
         start()
 
 
