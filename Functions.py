@@ -14,3 +14,8 @@ def load():
     with open(BASE_FILE, "r", encoding="utf-8") as data:
         notes = json.load(data)
 
+def add_note(text):
+    load()
+    data_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    notes.append({"data_time": data_time, "note": text})
+    save()
