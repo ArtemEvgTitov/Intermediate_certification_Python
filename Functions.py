@@ -22,12 +22,12 @@ def print_all():
     print(show_notes(notes))
 
 def show_notes(notes):
-    rez_string = ''
+    result = ''
     for i in notes:
         for key, value in i.items():
-            rez_string += str(key) + ': ' + str(value) + '\n'
-        rez_string += '\n'
-    return rez_string
+            result += str(key) + ': ' + str(value) + '\n'
+        result += '\n'
+    return result
 
 def add_note(heading, text):
     load()
@@ -49,3 +49,22 @@ def search_id():
         else:
             ID = True
     return id
+
+def search_note(text):
+    load()
+    if text == '1':
+        id = input('Введите ID заметки: ')
+        for i in notes:
+            if int(id) == i["ID"]:
+                result = ''
+                for key, value in i.items():
+                    result += str(key) + ': ' + str(value) + '\n'
+                print(result)
+    elif text == '2':
+        heading = input('Введите текст заголовка: ')
+        pass
+    elif text == '3':
+        pass
+
+def stop_programm():
+    pass
