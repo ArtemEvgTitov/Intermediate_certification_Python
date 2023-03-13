@@ -2,7 +2,7 @@ import Functions as func
 import Logger as log
 
 message_hi = '\nПрограмма запущена\n '
-message_bay = 'Программа выключена'
+message_bay = '\nПрограмма выключена'
 
 message_level1 = 'Вот какие действия Вам доступны:\n' \
                 '1 - Показать все заметки\n' \
@@ -42,9 +42,10 @@ def start():
         start()
     elif answer == '4':
         log.text_in_log("Пользователь запросил выключение программы")
+        print(message_bay)
         func.stop_programm()
     else:
-        print("Некорректный ввод")
+        print("Некорректный ввод. Программа будет перезапущена")
         log.text_in_log("Некорректный ввод в основном меню программы")
         start()
 
