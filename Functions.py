@@ -19,7 +19,6 @@ def load():
         log.text_in_log("База успешно загружена")
     except:
         log.text_in_log("Ошибка загрузки базы. Вероятно, отсуствует файл")
-        pass
 
 def print_all():
     load()
@@ -32,12 +31,16 @@ def print_all():
     print(result)
 
 def add_note(heading, text):
-    load()
-    id = selection_id()
-    data_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    notes.append({"ID": id, "Дата создания": data_time, "Заголовок": heading, "Заметка": text})
-    log.text_in_log(f"В базу добавлена заметка: \nID:{id}\nЗаголовок: {heading}\nТекст: {text}")
-    save()
+    try:
+        load()
+        id = selection_id()
+        data_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        notes.append({"ID": id, "Дата создания": data_time, "Заголовок": heading, "Заметка": text})
+        log.text_in_log(f"В базу добавлена заметка: \nID:{id}\nЗаголовок: {heading}\nТекст: {text}")
+        save()
+    except:
+        pass
+
 
 def selection_id():
     load()
@@ -64,6 +67,7 @@ def search_note(text):
                     result += str(key) + ': ' + str(value) + '\n'
                 log.text_in_log(f"Произведён поиск по ID. Результат поиска:\n{result}")
                 print(result)
+                delete_note(id)
     elif text == '2':
         heading = input('Введите текст заголовка: ')
         pass
@@ -71,6 +75,12 @@ def search_note(text):
         note = input('Введите текст заметки: ')
         pass
 
+def delete_note(id):
+    load()
+    for i in notes:
+        if id == i['ID']:
+            notes.remove(i)
+    save()
+
 def stop_programm():
     log.text_in_log("======== EXIT PROGRAMM ========")
-    pass
