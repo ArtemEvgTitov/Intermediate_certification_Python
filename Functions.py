@@ -77,10 +77,14 @@ def search_note(text):
 
 def delete_note(id):
     load()
+    temp = []
     for i in notes:
-        if id == i['ID']:
-            notes.remove(i)
-    save()
+        if int(id) != i['ID']:
+            temp.append(i)
+    with open(BASE_FILE, "w", encoding="utf-8") as note:
+        note.write(json.dumps(temp, ensure_ascii=False))
+    print(f"База перезаписана в файле {BASE_FILE}")
+    log.text_in_log(f"База перезаписана в файле {BASE_FILE}")
 
 def stop_programm():
     log.text_in_log("======== EXIT PROGRAMM ========")
