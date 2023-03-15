@@ -27,26 +27,26 @@ def start():
     print(message_hi)
     answer = input(message_level1)
     if answer == '1':
-        log.text_in_log("Пользователь запросил вывод всех заметок в терминал")
+        log.text_in_log('Пользователь запросил вывод всех заметок в терминал')
         func.print_all()
         start()
-    elif answer == "2":
-        log.text_in_log("Пользователь запросил создание заметки")
-        heading = input("Введите заголовок для заметки: ")
-        text = input("Введите текст заметки: ")
+    elif answer == '2':
+        log.text_in_log('Пользователь запросил создание заметки')
+        heading = input('Введите заголовок для заметки: ')
+        text = input('Введите текст заметки: ')
         func.add_note(heading, text)
         start()
     elif answer == '3':
-        log.text_in_log("Пользователь запросил поиск заметки")
+        log.text_in_log('Пользователь запросил поиск заметки')
         func.search_note(input(message_level2))
         start()
     elif answer == '4':
-        log.text_in_log("Пользователь запросил выключение программы")
+        log.text_in_log('Пользователь запросил выключение программы')
         print(message_bay)
         func.stop_programm()
     else:
-        print("Некорректный ввод. Программа будет перезапущена")
-        log.text_in_log("Некорректный ввод в основном меню программы")
+        print('Некорректный ввод. Программа будет перезапущена')
+        log.text_in_log(f'Некорректный ввод в основном меню программы. Пользователь ввёл "{answer}"')
         start()
 
 
