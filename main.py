@@ -29,38 +29,41 @@ message_level4 = 'Что именно вы хотите изменить:\n' \
                 'введите цифру с необходимым действием: '
 
 def start():
-    log.text_in_log('Программа запущена')
-    print(message_hi)
-    answer = input(message_level1)
-    if answer == '1':
-        log.text_in_log('Пользователь запросил вывод всех заметок в терминал')
-        func.print_all()
-        start()
-    elif answer == '2':
-        log.text_in_log('Пользователь запросил создание заметки')
-        heading = input('Введите заголовок для заметки: ')
-        log.text_in_log(f'Пользователь ввёл "{heading}" в качестве заголовка')
-        text = input('Введите текст заметки: ')
-        log.text_in_log(f'Пользователь ввёл "{text}" в качестве текста')
-        func.add_note(heading, text)
-        start()
-    elif answer == '3':
-        log.text_in_log('Пользователь запросил поиск заметки')
-        result, id = func.search_note(input(message_level2))
-        if result == '':
-            log.text_in_log('В базе нет заметки, которую искал пользователь')
-            print('\nТакой заметки в базе нет')
+    try:
+        log.text_in_log('Программа запущена')
+        print(message_hi)
+        answer = input(message_level1)
+        if answer == '1':
+            log.text_in_log('Пользователь запросил вывод всех заметок в терминал')
+            func.print_all()
+            start()
+        elif answer == '2':
+            log.text_in_log('Пользователь запросил создание заметки')
+            heading = input('Введите заголовок для заметки: ')
+            log.text_in_log(f'Пользователь ввёл "{heading}" в качестве заголовка')
+            text = input('Введите текст заметки: ')
+            log.text_in_log(f'Пользователь ввёл "{text}" в качестве текста')
+            func.add_note(heading, text)
+            start()
+        elif answer == '3':
+            log.text_in_log('Пользователь запросил поиск заметки')
+            result, id = func.search_note(input(message_level2))
+            if result == '':
+                log.text_in_log('В базе нет заметки, которую искал пользователь')
+                print('\nТакой заметки в базе нет')
+            else:
+                print(result)
+                func.options_for_note(input(message_level3), id, message_level4)
+            start()
+        elif answer == '4':
+            log.text_in_log('Пользователь запросил выключение программы')
+            print(message_bay)
+            func.stop_programm()
         else:
-            print(result)
-            func.options_for_note(input(message_level3), id, message_level4)
-        start()
-    elif answer == '4':
-        log.text_in_log('Пользователь запросил выключение программы')
-        print(message_bay)
-        func.stop_programm()
-    else:
-        print('Некорректный ввод. Программа будет перезапущена')
-        log.text_in_log(f'Некорректный ввод в основном меню программы. Пользователь ввёл "{answer}"')
+            print('Некорректный ввод. Программа будет перезапущена')
+            log.text_in_log(f'Некорректный ввод в основном меню программы. Пользователь ввёл "{answer}"')
+            start()
+    except:
         start()
 
 
