@@ -2,6 +2,8 @@ import json
 import Logger as log
 from datetime import datetime
 
+import main
+
 BASE_FILE = 'notes.json'
 notes = []
 
@@ -23,12 +25,14 @@ def load():
 def print_all():
     load()
     result = ''
+    count = 0
     for i in notes:
+        count += 1
         for key, value in i.items():
             result += str(key) + ': ' + str(value) + '\n'
         result += '\n'
     log.text_in_log('Вывод всех заметок в терминал')
-    print(result)
+    print('\n' + f'Всего заметок в базе: {count}' + '\n\n' + result)
 
 def add_note(heading, text):
     try:
@@ -54,40 +58,42 @@ def selection_id():
             id += 1
         else:
             ID = True
+    log.text_in_log(f'Осуществлён подбор ID для новой заметки. ID:{id}')
     return id
 
-def search_note(text):
+def search_note(text, message):
     load()
+    result = ''
     if text == '1':
         id = input('Введите ID заметки: ')
+        log.text_in_log(f'Пользователь искал ID: "{id}"')
         for i in notes:
             if int(id) == i["ID"]:
-                result = ''
                 for key, value in i.items():
                     result += str(key) + ': ' + str(value) + '\n'
                 log.text_in_log(f'Произведён поиск по ID. Результат поиска:\n{result}')
-                print(result)
     elif text == '2':
-        heading = (input('Введите текст заголовка: ')).lower()
+        heading = input('Введите текст заголовка: ')
+        log.text_in_log(f'Пользователь искал заголовок: "{heading}"')
         for i in notes:
-            if heading in i["Заголовок"]:
-                result = ''
+            if heading.lower() in (i["Заголовок"]).lower():
                 for key, value in i.items():
                     result += str(key) + ': ' + str(value) + '\n'
-                log.text_in_log(f'Произведён поиск по ID. Результат поиска:\n{result}')
-                print(result)
+                log.text_in_log(f'Произведён поиск по заголовку. Результат поиска:\n{result}')
     elif text == '3':
-        note = (input('Введите текст заметки: ')).lower()
+        note = input('Введите текст заметки: ')
+        log.text_in_log(f'Пользователь искал текст заметки: "{note}"')
         for i in notes:
-            if note in i["Заметка"]:
-                result = ''
+            if note.lower() in (i["Заметка"]).lower():
                 for key, value in i.items():
                     result += str(key) + ': ' + str(value) + '\n'
                 log.text_in_log(f'Произведён поиск по ID. Результат поиска:\n{result}')
-                print(result)
+    else:
+        print('Некорректный ввод. Программа будет перезапущена')
+        log.text_in_log(f'Некорректный ввод в меню поиска. Пользователь ввёл "{text}"')
+        main.start()
+    return result
 
-def search_cycle(notes):
-    pass
 
 def delete_note(id):
     load()
