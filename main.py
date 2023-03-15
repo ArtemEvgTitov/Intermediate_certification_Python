@@ -23,6 +23,11 @@ message_level3 = 'Вот какие действия Вам доступны:\n'
                 '3 - Назад\n' \
                 'введите цифру с необходимым действием: '
 
+message_level4 = 'Что именно вы хотите изменить:\n' \
+                '1 - Заголовок\n' \
+                '2 - Текст заметки\n' \
+                'введите цифру с необходимым действием: '
+
 def start():
     log.text_in_log('Программа запущена')
     print(message_hi)
@@ -41,12 +46,13 @@ def start():
         start()
     elif answer == '3':
         log.text_in_log('Пользователь запросил поиск заметки')
-        result = func.search_note(input(message_level2), message_level3)
+        result, id = func.search_note(input(message_level2))
         if result == '':
             log.text_in_log('В базе нет заметки, которую искал пользователь')
             print('\nТакой заметки в базе нет')
         else:
             print(result)
+            func.options_for_note(input(message_level3), id, message_level4)
         start()
     elif answer == '4':
         log.text_in_log('Пользователь запросил выключение программы')
