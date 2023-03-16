@@ -179,3 +179,4 @@ def delete_note(id):
 def stop_programm():
     # Остановка программы
     log.text_in_log("======== EXIT PROGRAMM ========")
+
