@@ -1,5 +1,6 @@
 from datetime import datetime as dt
 
+
 def text_in_log(text):
     # Логирование
     path = 'log_notes.csv'
