@@ -1,6 +1,8 @@
 import Functions as func
 import Logger as log
 
+
+
 message_hi = '\nПрограмма запущена\n '
 message_bay = '\nПрограмма выключена'
 
