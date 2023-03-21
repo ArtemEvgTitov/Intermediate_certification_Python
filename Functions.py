@@ -2,7 +2,7 @@ import json
 import Logger as log
 from datetime import datetime
 
-import main
+import Start
 
 BASE_FILE = 'notes.json'
 notes = []
