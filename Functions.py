@@ -128,7 +128,7 @@ def options_for_note(text, id, message_level4):
         log.text_in_log('Пользователь выбрал удаление заметки')
         delete_note(id)
     elif text == '3':
-        main.start()
+        Start.start()
 
 
 def edit_note(id, text):
